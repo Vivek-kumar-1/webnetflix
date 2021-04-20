@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <style>
+            *{
+                margin: 0%;    
+                padding: 0%;
+                box-sizing: border-box;
+                display: grid;
+                place-items: center;
+            }
+
+            .center_div{
+                display: flex;
+                width: 100%;
+                overflow-y: hidden;
+                overflow-x: scroll;
+            }
+
+            .main_div{
+                width: 100vw;
+                height: 100vh;
+                background-color: hsl(201, 21%, 94%);
+            }
+            img{
+                padding: 20px;
+                border-radius: 30px;
+                transition: transform 0.3s ease-in;
+            }
+            img:hover{
+                transform: scale(1.0);
+            }
+            .center_div::-webkit-scrollbar{
+                overflow : hidden;
+            }
+    </style>
+
+</head>
+<body>
+    <div class="main_div">
+        <div class="center_div" id="centerdiv">
+            <!-- <img src="" alt=""> -->
+        </div>
+    </div>
+    <script>
+        const centerdiv = document.getElementById('centerdiv');
+        fetch("https://jsonplaceholder.typicode.com/photos?_limit=28").then( (apidata) => {
+            // console.log(apidata.json());
+            return apidata.json();
+        }).then( (jsondata) => {
+          
+            jsondata.map((val) => {
+
+                key = val.id;
+                let img = document.createElement("img");
+                img.src = `https://picsum.photos/200/350?random=${val.id}`;
+                centerdiv.appendChild(img);
+                // console.log(val.url);
+            });
+        })
+    </script>
+</body>
+</html>
